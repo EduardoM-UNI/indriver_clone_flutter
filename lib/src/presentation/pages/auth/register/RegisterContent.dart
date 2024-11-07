@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:indriver_clone_flutter/src/presentation/widgets/DefaultButton.dart';
-import 'package:indriver_clone_flutter/src/presentation/widgets/DefaultTextField.dart';
+import 'package:indriver_clone_flutter/src/presentation/widgets/DefaultTextFieldOutlined.dart';
 
 class Registercontent extends StatelessWidget {
   const Registercontent({super.key});
@@ -44,57 +44,77 @@ class Registercontent extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomRight,
-              colors: [
-                Color.fromARGB(255, 255, 255, 255),
-                Color.fromARGB(255, 154, 154, 154),
+              colors: const [
+              Color.fromARGB(255, 14, 29, 166),
+              Color.fromARGB(255, 30, 112, 227),
               ])
           ),
-          child: Column(
+          child: Stack(
             children: [
-              _imageBanner(),
-              DefaultTextField(
-                text: 'Name', 
-                icon: Icons.person_outline,
-                margin: EdgeInsets.only(left: 40, right: 40, top: 50),
-                ),
-                DefaultTextField(
-                text: 'Surname', 
-                icon: Icons.person_2_outlined,
-                margin: EdgeInsets.only(left: 40, right: 40, top: 15),
-                ),
-                DefaultTextField(
-                text: 'Email', 
-                icon: Icons.email_outlined,
-                margin: EdgeInsets.only(left: 40, right: 40, top: 15),
-                ),
-                DefaultTextField(
-                text: 'Phone', 
-                icon: Icons.phone_outlined,
-                margin: EdgeInsets.only(left: 40, right: 40, top: 15),
-                ),
-                DefaultTextField(
-                text: 'Password', 
-                icon: Icons.lock_outlined,
-                margin: EdgeInsets.only(left: 40, right: 40, top: 15),
-                ),
-                DefaultTextField(
-                text: 'Confirm Password', 
-                icon: Icons.lock_outlined,
-                margin: EdgeInsets.only(left: 40, right: 40, top: 15),
-                ),
-                DefaultButton(
-                  text: 'Create User',
-                  margin: EdgeInsets.only(top: 30, left: 60, right: 60),
+              _imageBackground(context),
+              SingleChildScrollView(
+                child: Column(
+                    children: [
+                      _imageBanner(),
+                        DefaultTextFieldOutLined(
+                        text: 'Name', 
+                        icon: Icons.person_outline,
+                        margin: EdgeInsets.only(left: 40, right: 40, top: 50),
+                        ),
+                        DefaultTextFieldOutLined(
+                        text: 'Surname', 
+                        icon: Icons.person_2_outlined,
+                        margin: EdgeInsets.only(left: 40, right: 40, top: 15),
+                        ),
+                        DefaultTextFieldOutLined(
+                        text: 'Email', 
+                        icon: Icons.email_outlined,
+                        margin: EdgeInsets.only(left: 40, right: 40, top: 15),
+                        ),
+                        DefaultTextFieldOutLined(
+                        text: 'Phone', 
+                        icon: Icons.phone_outlined,
+                        margin: EdgeInsets.only(left: 40, right: 40, top: 15),
+                        ),
+                        DefaultTextFieldOutLined(
+                        text: 'Password', 
+                        icon: Icons.lock_outlined,
+                        margin: EdgeInsets.only(left: 40, right: 40, top: 15),
+                        ),
+                        DefaultTextFieldOutLined(
+                        text: 'Confirm Password', 
+                        icon: Icons.lock_outlined,
+                        margin: EdgeInsets.only(left: 40, right: 40, top: 15),
+                        ),
+                        DefaultButton(
+                          onPressed: (){},
+                          text: 'Create User',
+                          margin: EdgeInsets.only(top: 30, left: 60, right: 60),
+                          ),
+                          SizedBox(height: 25),
+                          _separatorOr(),
+                          _textIAreadyHaveAccount(context)
+                    ],
                   ),
-                  SizedBox(height: 25),
-                  _separatorOr(),
-                  _textIAreadyHaveAccount(context)
+              ),
             ],
           ),
-        )
+        ), 
       ],
     );
   }
+Widget _imageBackground(BuildContext context) {
+      return Container(
+        alignment: Alignment.bottomCenter,
+        margin: EdgeInsets.only(bottom: 50),
+        child: Image.asset(
+          'assets/img/destination.png',
+          width: MediaQuery.of(context).size.width *0.6,
+          height: MediaQuery.of(context).size.height *0.4,
+          opacity: AlwaysStoppedAnimation(0.2),
+          ),
+      );
+}
 
  Widget _textIAreadyHaveAccount(BuildContext context){
     return Row(

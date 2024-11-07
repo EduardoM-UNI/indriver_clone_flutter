@@ -1,88 +1,108 @@
 import 'package:flutter/material.dart';
+import 'package:indriver_clone_flutter/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
+import 'package:indriver_clone_flutter/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
 import 'package:indriver_clone_flutter/src/presentation/widgets/DefaultButton.dart';
 import 'package:indriver_clone_flutter/src/presentation/widgets/DefaultTextField.dart';
 
 class LoginContent extends StatelessWidget {
-  const LoginContent({super.key});
+
+  LoginBloc? bloc;
+
+  LoginContent(this.bloc);
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-           // color: Color.fromARGB(255, 24, 181, 254),
-           gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color.fromARGB(255, 12, 38, 145),
-              Color.fromARGB(255, 34, 156, 249),
-            ]
-           ),
-          ),
-          padding: EdgeInsets.only(left: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-                _textLoginRotated(),
-                SizedBox(height: 100),
-                _textRegisterRotated(context),
-                SizedBox(height: 250),
-            ],
-          ),
-        ), 
-        Container(
-          margin: EdgeInsets.only(left: 60, bottom: 60), 
-          decoration: BoxDecoration(
-           // color: Color.fromARGB(255, 24, 181, 254),
-           gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color.fromARGB(255, 14, 29, 166),
-              Color.fromARGB(255, 30, 112, 227),
-            ]
-           ) ,
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(35),bottomLeft: Radius.circular(35))
-          ),
-          child: Container( 
-            margin: EdgeInsets.only(left: 25,right: 25), 
+    return Form(
+      key: bloc?.state.formkey,
+      child: Stack(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+             // color: Color.fromARGB(255, 24, 181, 254),
+             gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromARGB(255, 12, 38, 145),
+                Color.fromARGB(255, 34, 156, 249),
+              ]
+             ),
+            ),
+            padding: EdgeInsets.only(left: 12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 50),
-                _textWelcome('Welcome'),
-                _textWelcome('Back.....'),
-                _imageCar(),
-                _textLogin(),
-                  DefaultTextField(
-                    text: 'email', 
-                    icon: Icons.email_outlined),
-                  DefaultTextField(
-                    text: 'password', 
-                    icon: Icons.lock_outline,
-                    margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                    ),
-                  Spacer(),
-                  DefaultButton(
-                    text: 'SING UP',
-                    color: Colors.white,
-                    textColor: Colors.blue,
-                    ),
-                  SizedBox(height: 20 ),
-                  _separatorOr(),
-                  SizedBox(height: 20 ),
-                  _textDontHaveAccount(context),
-                  SizedBox(height: 90)
+                  _textLoginRotated(),
+                  SizedBox(height: 100),
+                  _textRegisterRotated(context),
+                  SizedBox(height: 250),
               ],
             ),
+          ), 
+          Container(
+            margin: EdgeInsets.only(left: 60, bottom: 60), 
+            decoration: BoxDecoration(
+             // color: Color.fromARGB(255, 24, 181, 254),
+             gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromARGB(255, 14, 29, 166),
+                Color.fromARGB(255, 30, 112, 227),
+              ]
+             ) ,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(35),bottomLeft: Radius.circular(35))
+            ),
+            child: Container( 
+              height: MediaQuery.of(context).size.height,
+              margin: EdgeInsets.only(left: 25,right: 25), 
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 50),
+                    _textWelcome('Welcome'),
+                    _textWelcome('Back.....'),
+                    _imageCar(),
+                    _textLogin(),
+                      DefaultTextField(
+                        onChanged: (text) {
+                          bloc?.add(EmailChanged(email: text));
+                        },
+                        text: 'email', 
+                        icon: Icons.email_outlined),
+                      DefaultTextField(
+                        onChanged: (text) {
+                          bloc?.add(PasswordChanged(password: text));
+                        },
+                        text: 'password', 
+                        icon: Icons.lock_outline,
+                        margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                        ),
+                      SizedBox(height: MediaQuery.of(context).size.height*0.15),
+                      DefaultButton(
+                        text: 'SING UP',
+                        onPressed: (){
+                          bloc?.add(FormSubmit());
+                        },
+                        color: Colors.white,
+                        textColor: Colors.blue,
+                        ),
+                      SizedBox(height: 20 ),
+                      _separatorOr(),
+                      SizedBox(height: 20 ),
+                      _textDontHaveAccount(context),
+                      SizedBox(height: 90)
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
     Widget _textDontHaveAccount(BuildContext context){

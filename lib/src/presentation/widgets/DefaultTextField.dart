@@ -5,10 +5,12 @@ class DefaultTextField extends StatelessWidget {
   String text;
   IconData icon;
   EdgeInsetsGeometry margin;
+  Function(String text) onChanged;
   
   DefaultTextField({
     required this.text,
     required this.icon,
+    required this.onChanged,
     this.margin = const EdgeInsets.only(top: 50, left: 20, right: 20),
   });
 
@@ -25,6 +27,9 @@ class DefaultTextField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
+        onChanged: (text) {
+          onChanged(text);
+        },
         decoration: InputDecoration(
           label: Text(text),
           border: InputBorder.none,
