@@ -7,7 +7,7 @@ Color color;
 Color textColor;
 EdgeInsetsGeometry margin;
 
-//r
+
    DefaultButton({
     required this.text,
     this.color = Colors.white,
