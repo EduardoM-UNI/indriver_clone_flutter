@@ -74,7 +74,7 @@ class LoginContent extends StatelessWidget {
                     _textLogin(),
                       DefaultTextField(
                         onChanged: (text) {
-                          context.read<LoginBloc>().add(EmailChanged(email: Blocformitem(value: text)));
+                          context.read<LoginBloc>().add(EmailChanged(email: BlocFormitem(value: text)));
                         },
                         text: 'email',
                         validator: (value){
@@ -83,7 +83,7 @@ class LoginContent extends StatelessWidget {
                         icon: Icons.email_outlined),
                       DefaultTextField(
                         onChanged: (text) {
-                          context.read<LoginBloc>().add(PasswordChanged(password: Blocformitem(value: text)));
+                          context.read<LoginBloc>().add(PasswordChanged(password: BlocFormitem(value: text)));
                         },
                         text: 'password', 
                         validator: (value){

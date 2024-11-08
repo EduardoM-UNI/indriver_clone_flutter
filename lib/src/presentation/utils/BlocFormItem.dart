@@ -1,18 +1,18 @@
-class Blocformitem {
+class BlocFormitem {
 
   final String value;
   final String? error;
 
-  const Blocformitem({
+  const BlocFormitem({
     this.value = '',
     this.error
   });
 
-  Blocformitem copyWith({
+  BlocFormitem copyWith({
       String?  value,
       String? error,
   }) {
-      return Blocformitem(
+      return BlocFormitem(
         value: value ?? this.value,
         error: error ?? this.error
       );

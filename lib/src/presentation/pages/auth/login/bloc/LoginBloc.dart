@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indriver_clone_flutter/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
 import 'package:indriver_clone_flutter/src/presentation/pages/auth/login/bloc/LoginState.dart';
 import 'package:indriver_clone_flutter/src/presentation/utils/BlocFormItem.dart';
-
 // Se registra el evento
 
 class LoginBloc extends Bloc<LoginEvent,LoginState> {
@@ -19,7 +18,7 @@ class LoginBloc extends Bloc<LoginEvent,LoginState> {
     on <EmailChanged>((event, emit) {
         emit(
           state.copyWith(
-            email: Blocformitem(
+            email: BlocFormitem(
                 value: event.email.value,
                 error: event.email.value.isEmpty ? 'Enter a email' : null
             ),
@@ -30,7 +29,7 @@ class LoginBloc extends Bloc<LoginEvent,LoginState> {
     on <PasswordChanged>((event, emit) {
           emit(
             state.copyWith(
-             password: Blocformitem(
+             password: BlocFormitem(
                 value: event.password.value,
                 error: event.password.value.isEmpty 
                 ? 'Enten a password' : event.password.value.length < 6

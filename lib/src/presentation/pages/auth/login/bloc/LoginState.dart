@@ -6,19 +6,19 @@ import 'package:indriver_clone_flutter/src/presentation/utils/BlocFormItem.dart'
 
 class LoginState extends Equatable{
 
-  final Blocformitem email;
-  final Blocformitem password;
+  final BlocFormitem email;
+  final BlocFormitem password;
   final GlobalKey<FormState> ? formkey;
 
   const LoginState({
-    this.email = const Blocformitem(error: 'Enter a valid email'),
-    this.password = const Blocformitem(error: 'Enter a valid password'),
+    this.email = const BlocFormitem(error: 'Enter a valid email'),
+    this.password = const BlocFormitem(error: 'Enter a valid password'),
     this.formkey
   });
 
   LoginState copyWith({
-      Blocformitem? email,
-      Blocformitem? password,
+      BlocFormitem? email,
+      BlocFormitem? password,
       GlobalKey<FormState> ? formkey,
   }) {
       return LoginState( //null validate

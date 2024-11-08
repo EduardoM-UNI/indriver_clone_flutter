@@ -8,12 +8,12 @@ abstract class LoginEvent {}
 class LoginInitEvent extends LoginEvent {}
 
 class EmailChanged extends LoginEvent {
-  final Blocformitem email;
+  final BlocFormitem email;
   EmailChanged({required this.email});
 }
 
 class PasswordChanged extends LoginEvent {
-  final Blocformitem password;
+  final BlocFormitem password;
   PasswordChanged({required this.password});
 }
 
