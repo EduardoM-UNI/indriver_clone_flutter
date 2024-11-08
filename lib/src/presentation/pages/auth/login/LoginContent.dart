@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:indriver_clone_flutter/main.dart';
 import 'package:indriver_clone_flutter/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
 import 'package:indriver_clone_flutter/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
+import 'package:indriver_clone_flutter/src/presentation/pages/auth/login/bloc/LoginState.dart';
+import 'package:indriver_clone_flutter/src/presentation/utils/BlocFormItem.dart';
 import 'package:indriver_clone_flutter/src/presentation/widgets/DefaultButton.dart';
 import 'package:indriver_clone_flutter/src/presentation/widgets/DefaultTextField.dart';
 
 class LoginContent extends StatelessWidget {
 
-  LoginBloc? bloc;
+  LoginState state;
 
-  LoginContent(this.bloc);
+  LoginContent(this.state);
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: bloc?.state.formkey,
+      key: state.formkey,
       child: Stack(
         children: [
           Container(
@@ -24,7 +28,7 @@ class LoginContent extends StatelessWidget {
              gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [
+              colors: const [
                 Color.fromARGB(255, 12, 38, 145),
                 Color.fromARGB(255, 34, 156, 249),
               ]
@@ -43,13 +47,13 @@ class LoginContent extends StatelessWidget {
             ),
           ), 
           Container(
-            margin: EdgeInsets.only(left: 60, bottom: 60), 
+            margin: EdgeInsets.only(left: 60, bottom: 35), 
             decoration: BoxDecoration(
              // color: Color.fromARGB(255, 24, 181, 254),
              gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [
+              colors: const [
                 Color.fromARGB(255, 14, 29, 166),
                 Color.fromARGB(255, 30, 112, 227),
               ]
@@ -70,15 +74,21 @@ class LoginContent extends StatelessWidget {
                     _textLogin(),
                       DefaultTextField(
                         onChanged: (text) {
-                          bloc?.add(EmailChanged(email: text));
+                          context.read<LoginBloc>().add(EmailChanged(email: Blocformitem(value: text)));
                         },
-                        text: 'email', 
+                        text: 'email',
+                        validator: (value){
+                          return state.email.error;
+                        }, 
                         icon: Icons.email_outlined),
                       DefaultTextField(
                         onChanged: (text) {
-                          bloc?.add(PasswordChanged(password: text));
+                          context.read<LoginBloc>().add(PasswordChanged(password: Blocformitem(value: text)));
                         },
                         text: 'password', 
+                        validator: (value){
+                          return state.password.error;
+                        }, 
                         icon: Icons.lock_outline,
                         margin: EdgeInsets.only(top: 20, left: 20, right: 20),
                         ),
@@ -86,7 +96,12 @@ class LoginContent extends StatelessWidget {
                       DefaultButton(
                         text: 'SING UP',
                         onPressed: (){
-                          bloc?.add(FormSubmit());
+                          if (state.formkey!.currentState!.validate()){
+                             context.read<LoginBloc>().add(FormSubmit());
+                          }
+                            else{
+                              print('The form is no valid');
+                            }
                         },
                         color: Colors.white,
                         textColor: Colors.blue,
