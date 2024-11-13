@@ -185,7 +185,7 @@ Widget _imageBackground(BuildContext context) {
         SizedBox(width: 7),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, 'login');
+            Navigator.pop(context);
           },
           child: Text(
             'Log in',
@@ -243,7 +243,7 @@ Widget _imageBackground(BuildContext context) {
   Widget _textLoginRotated(BuildContext context) {
     return GestureDetector(
       onTap: () {
-          Navigator.pushNamed(context, 'login');
+          Navigator.pop(context);
         },
       child: RotatedBox(
           quarterTurns: 1,
