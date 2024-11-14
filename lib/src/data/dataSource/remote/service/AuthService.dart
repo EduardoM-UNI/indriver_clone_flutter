@@ -5,7 +5,7 @@ import 'package:indriver_clone_flutter/src/domain/models/AuthResponse.dart';
 import 'package:indriver_clone_flutter/src/domain/utils/ListToString.dart';
 import 'package:indriver_clone_flutter/src/domain/utils/Resource.dart';
 
-class Authservice {
+class AuthService {
 
 
   Future<Resource<AuthResponse>> login(String email, String password) async {
